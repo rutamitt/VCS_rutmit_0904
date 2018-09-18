@@ -6,13 +6,12 @@ two_list = []
 three_list = []
 letter_list = []
 random_word = []
-level = int
+
 hangmanpics = hangman_picture.hangmanpics
 guess = str
 y = ''
 n = ''
 h = ''
-
 
 # Lygio pasirinkimas tarp 1-3
 def game():
@@ -29,16 +28,15 @@ def game():
     index = True
     while index == True:
         try:
-            level = raw_input("Enter your level:")
-            index = False
-        except NameError:
+            level = int(raw_input("Enter your level:"))
+            if level >= 4:
+                print 'Level is not available. Please choose 1-3'
+            else:
+                index = False
+        except ValueError:
             print 'Invalid input type, try again'
 
-    level = int(input("Enter your level:"))
-    while level >= 4:
-        print 'Level is not available. Please choose 1-3'
-        level = int(input("Enter your level:"))
-    # KAIP PADARYTI, KAD LEISTU IS NAUJO IVEST
+
     if level == 1:
         use = one_list
     elif level == 2:
@@ -46,10 +44,18 @@ def game():
     elif level == 3:
         use = three_list
 
-    mistakes = int(input("Enter maximum number (1-6) of possible mistakes: "))
+    index = True
+    while index == True:
+        try:
+            mistakes = int(raw_input("Enter maximum number (1-6) of possible mistakes: "))
+            if level >= 7:
+                print 'Number of mistakes is not available. Please choose 1-6'
+            else:
+                index = False
+        except ValueError:
+            print 'Invalid input type, try again'
 
-    if mistakes not in range(7):
-        print "Error! Maximum number of possible mistakes is 6"
+
     words_file = open("words.txt", "r")
 
     for word in words_file.readlines():
@@ -94,5 +100,3 @@ while end == "y":
         game()
     else:
         print 'bye!'
-
-dgoutrojtoijtr
