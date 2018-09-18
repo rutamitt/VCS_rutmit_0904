@@ -13,6 +13,7 @@ y = ''
 n = ''
 h = ''
 
+
 # Lygio pasirinkimas tarp 1-3
 def game():
     del one_list[0:10000]
@@ -24,11 +25,20 @@ def game():
     print ("Welcome to Hangerman! Before you start please enter your preferences:")
     print (
         "Level 1 - a word contains 4 or less letters, level 2 - between 5 and 8 letters & level 3 - more than 8 letters")
+
+    index = True
+    while index == True:
+        try:
+            level = raw_input("Enter your level:")
+            index = False
+        except NameError:
+            print 'Invalid input type, try again'
+
     level = int(input("Enter your level:"))
-    if 1 <= level <= 3:
-        pass
-    else:
-        print 'Level is not available. Please choose 1-3'  # KAIP PADARYTI, KAD LEISTU IS NAUJO IVEST
+    while level >= 4:
+        print 'Level is not available. Please choose 1-3'
+        level = int(input("Enter your level:"))
+    # KAIP PADARYTI, KAD LEISTU IS NAUJO IVEST
     if level == 1:
         use = one_list
     elif level == 2:
@@ -44,7 +54,7 @@ def game():
 
     for word in words_file.readlines():
         word_length = word.__len__()
-        if word_length <= 5:  # kodel cia reikia rasyti penkis o ne keturis, ty visur plius vienas
+        if word_length <= 5:  # kodel cia reikia rasyti penkis o ne keturis, ty visur plius vienas -- nes enteris yra kaip zenklas
             one_list.append(word.strip())
         elif 6 <= word_length <= 9:
             two_list.append(word.strip())
@@ -73,15 +83,16 @@ def game():
             i += 1
 
 
-def finish():
+end = "y"
+
+game()
+
+while end == "y":
     print 'game is over, do you want to try again?'
-    end = str(input("Press 'y' for yes or 'n' for no: "))
-    if end == y:
+    end = str(raw_input("Press 'y' for yes or 'n' for no: "))
+    if end == "y":
         game()
     else:
         print 'bye!'
 
-game()
-
-finish()
-
+dgoutrojtoijtr
